@@ -4,10 +4,11 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"gitlab/adamplansky/protobuf-grpc/todo"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/adamplansky/protobuf-grpc/todo"
 
 	grpc "google.golang.org/grpc"
 )
@@ -36,7 +37,6 @@ func main() {
 		fmt.Println(os.Stderr, err)
 		os.Exit(1)
 	}
-	fmt.Println("TODO")
 }
 
 const dbPath = "mydb.pb"

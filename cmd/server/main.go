@@ -5,11 +5,12 @@ import (
 
 	"encoding/binary"
 	"fmt"
-	"gitlab/adamplansky/protobuf-grpc/todo"
 	"io/ioutil"
 	"log"
 	"net"
 	"os"
+
+	"github.com/adamplansky/protobuf-grpc/todo"
 
 	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/context"
@@ -25,24 +26,6 @@ func main() {
 		log.Fatalf("could not liste to :8888: %v", err)
 	}
 	log.Fatal(srv.Serve(l))
-	// flag.Parse()
-	// if flag.NArg() < 1 {
-	// 	fmt.Fprintln(os.Stderr, "missing subcommand: list or add")
-	// }
-	// var err error
-	// switch cmd := flag.Arg(0); cmd {
-	// case "list":
-	// 	err = list()
-	// case "add":
-	// 	err = add(strings.Join(flag.Args()[1:], " "))
-	// default:
-	// 	err = fmt.Errorf("unkown subcommand %s", cmd)
-	// }
-	// if err != nil {
-	// 	fmt.Println(os.Stderr, err)
-	// 	os.Exit(1)
-	// }
-	// fmt.Println("TODO")
 }
 
 type taskServer struct{}
@@ -84,32 +67,6 @@ func (taskServer) Add(ctx context.Context, text *todo.Text) (*todo.Task, error) 
 	}
 	return task, nil
 }
-
-// func add(text string) error {
-// 	task := &todo.Task{
-// 		Text: text,
-// 		Done: false,
-// 	}
-// 	b, err := proto.Marshal(task)
-// 	if err != nil {
-// 		return fmt.Errorf("could not encode task: %v", err)
-// 	}
-// 	f, err := os.OpenFile(dbPath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
-// 	if err != nil {
-// 		return fmt.Errorf("could not open %s: %v", dbPath, err)
-// 	}
-// 	if err := binary.Write(f, endianness, length(len(b))); err != nil {
-// 		return fmt.Errorf("could not encode length of message")
-// 	}
-// 	_, err = f.Write(b)
-// 	if err != nil {
-// 		return fmt.Errorf("could not write bytes to file %s %v", dbPath, err)
-// 	}
-// 	if err := f.Close(); err != nil {
-// 		return fmt.Errorf("could not close file %s: %v", dbPath, err)
-// 	}
-// 	return nil
-// }
 
 func (s taskServer) List(context.Context, *todo.Void) (*todo.TaskList, error) {
 	b, err := ioutil.ReadFile(dbPath)

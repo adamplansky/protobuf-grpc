@@ -19,3 +19,12 @@ go run ./cmd/client/main.go add hello
 go run ./cmd/client/main.go list
 ```
 
+# docker
+```sh
+docker-compose up
+docker exec -it $(docker ps -q --filter ancestor=adamplansky-go-grpc-protobuf) sh
+
+# use client cmd
+client add first-todo
+client list
+```

@@ -1,0 +1,7 @@
+version: '3'
+services:
+  adamplansky-go-grpc-protobuf:
+    build: .
+    image: adamplansky-go-grpc-protobuf
+    ports:
+      - "8888:8888"
