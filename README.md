@@ -21,10 +21,18 @@ go run ./cmd/client/main.go list
 
 # docker
 ```sh
-docker-compose up
-docker exec -it $(docker ps -q --filter ancestor=adamplansky-go-grpc-protobuf) sh
+docker-compose up #port 8888 is exposed for local development
 
-# use client cmd
+
+# use client cmd inside the docker
+docker exec -it $(docker ps -q --filter ancestor=adamplansky-go-grpc-protobuf) sh
 client add first-todo
 client list
+
+# use go outside the docker
+go run ./cmd/client/main.go add hello
+# or
+go build -o client ./cmd/client/main.go #compile
+./client add xyz
+./client list
 ```
